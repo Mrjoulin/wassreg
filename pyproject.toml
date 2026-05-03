@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "wassreg"
-version = "0.1.0"
+version = "0.1.1"
 description = "Wasserstein-2 regression with PyTorch: Bezier/B-spline curve and surface fitting"
 readme = "README.md"
 requires-python = ">=3.9"

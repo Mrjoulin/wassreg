@@ -2,7 +2,7 @@ import torch
 from typing import Optional
 
 from .base import WassersteinCurveRegressor
-from utils.basis import bspline_basis
+from wassreg.utils.basis import bspline_basis
 
 
 class WassersteinBSplineRegressor(WassersteinCurveRegressor):

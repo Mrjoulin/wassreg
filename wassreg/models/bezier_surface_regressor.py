@@ -2,7 +2,7 @@ import torch
 from typing import Optional
 
 from .base import WassersteinSurfaceRegressor
-from utils.basis import bernstein_basis
+from wassreg.utils.basis import bernstein_basis
 
 
 class WassersteinBezierSurfaceRegressor(WassersteinSurfaceRegressor):

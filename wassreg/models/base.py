@@ -6,7 +6,7 @@ import numpy as np
 from abc import ABC, abstractmethod
 from typing import Union, Tuple, Optional
 
-from utils.utils import get_device, w2_diag_loss
+from wassreg.utils.utils import get_device, w2_diag_loss
 
 
 class WassersteinRegressor(nn.Module, ABC):
@@ -35,6 +35,7 @@ class WassersteinRegressor(nn.Module, ABC):
 
     def _normalize(self, X: torch.Tensor) -> torch.Tensor:
         """Scale ``X`` to the unit interval and cache min/max for later calls."""
+        X = X.unsqueeze(-1) if len(X.shape) < 2 else X
         if self._normalize_params is None:
             self._normalize_params = (X.min(), X.max())
         X_min, X_max = self._normalize_params
@@ -139,6 +140,7 @@ class WassersteinRegressor(nn.Module, ABC):
         X = torch.as_tensor(X, dtype=torch.float32, device=self.device)
         y = torch.as_tensor(y, dtype=torch.float32, device=self.device)
         X_norm = self._normalize(X)
+        y = y.unsqueeze(-1) if len(y.shape) < 2 else y
 
         if const_variance is None:
             # Estimate local variance (subclass-specific)
@@ -191,8 +193,10 @@ class WassersteinRegressor(nn.Module, ABC):
             X = torch.as_tensor(X, dtype=torch.float32, device=self.device)
             if return_numpy is None:
                 return_numpy = True
-        elif return_numpy is None:
-            return_numpy = False
+        else:
+            X = X.to(device=self.device)
+            if return_numpy is None:
+                return_numpy = False
 
         X_norm = self._normalize(X)
         mu, sigma = self._evaluate(X_norm)

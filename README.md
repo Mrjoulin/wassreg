@@ -1,4 +1,4 @@
-# Wasserstein Regressor
+# Wassreg
 
 PyTorch-based library for Wasserstein-2 regression using Bezier and B-spline curves/surfaces. Fits continuous curves and surfaces with uncertainty estimation via diagonal Wasserstein-2 loss.
 
@@ -13,11 +13,11 @@ PyTorch-based library for Wasserstein-2 regression using Bezier and B-spline cur
 ## Installation
 
 ```bash
-# Using uv (recommended)
-uv pip install wassreg  # Replace with your chosen name
-
 # Using pip
-pip install wassreg
+pip install -U wassreg
+
+# Using uv (recommended)
+uv pip install wassreg
 ```
 
 For development:
@@ -82,6 +82,25 @@ model = WassersteinBezierSurfaceRegressor(
     grid_size=50
 )
 model.fit(X, y, epochs=500, lr=1e-3)
+```
+
+## Examples
+
+Ready-to-run examples are in the `examples/` directory:
+
+| File | Description |
+|------|-------------|
+| `examples/bezier_curve.py` | 1D Bezier curve with sum of sines, matplotlib  |
+| `examples/bspline_curve.py` |B-spline curve with complex trajectory, matplotlib |
+| `examples/bezier_surface.py` | Simple 2D Bezier surface, Plotly 3D |
+| `examples/bspline_surface.py` | B-spline surface for 3D torus approximation, Plotly 3D |
+
+Run examples:
+```bash
+uv run examples/bezier_curve.py   # Requires matplotlib
+uv run examples/bspline_curve.py  # Requires matplotlib
+uv run examples/bezier_surface.py  # Requires plotly
+uv run examples/bspline_surface.py # Requires plotly
 ```
 
 ## API Overview

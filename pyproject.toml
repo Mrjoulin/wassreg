@@ -32,6 +32,9 @@ dev = [
     "plotly>=5.0.0",
 ]
 
+[project.urls]
+Source = "https://github.com/Mrjoulin/wassreg"
+
 [tool.hatch.build.targets.wheel]
 packages = ["wassreg"]
 
